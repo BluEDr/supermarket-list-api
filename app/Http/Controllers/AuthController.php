@@ -72,6 +72,7 @@ class AuthController extends Controller
     // Get the authenticated user's details
     public function user(Request $request)
     {
+        error_log(`$request`); 
         return $request->user();
     }
 
@@ -81,5 +82,9 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
 
         return response()->json(['message' => 'Logged out successfully']);
+    }
+
+    public function showLoginForm() {
+        return view('auth.login');
     }
 }
