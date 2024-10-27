@@ -27,27 +27,6 @@ class AuthController extends Controller
         return response()->json(['message' => 'User registered successfully']);
     }
 
-    // Login a user and create a token
-    // public function login(Request $request)
-    // {
-    //     $request->validate([
-    //         'email' => 'required|string|email',
-    //         'password' => 'required|string',
-    //     ]);
-
-    //     $user = User::where('email', $request->email)->first();
-
-    //     if (!$user || !Hash::check($request->password, $user->password)) {
-    //         throw ValidationException::withMessages([
-    //             'email' => ['The provided credentials are incorrect.'],
-    //         ]);
-    //     }
-
-    //     $token = $user->createToken('auth_token')->plainTextToken;
-
-    //     return response()->json(['access_token' => $token, 'token_type' => 'Bearer']);
-    // }
-
     public function login(Request $request)
     {
         $request->validate([
@@ -73,7 +52,7 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         error_log(`$request`); 
-        return $request->user();
+        return ["status"=>"You have succesfully loged in","req"=>$request->pass];
     }
 
     // Logout a user by deleting tokens

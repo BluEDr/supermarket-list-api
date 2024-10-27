@@ -12,6 +12,14 @@ class User extends Authenticatable
 {
     use HasApiTokens,HasFactory, Notifiable;
 
+    public function partners() {
+        return $this->hasMany(Partner::class, 'user_id');
+    }
+
+    public function superListsUser() {
+        return $this->hasMany(SuperList::class, 'user_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
