@@ -12,12 +12,27 @@ class User extends Authenticatable
 {
     use HasApiTokens,HasFactory, Notifiable;
 
-    public function partners() {
+    //For partners table
+    public function user_id() {
         return $this->hasMany(Partner::class, 'user_id');
     }
 
+    public function partners_id() {
+        return $this->hasMany(Partner::class, 'partner_id');
+    }
+
+    //For super_lists table
     public function superListsUser() {
         return $this->hasMany(SuperList::class, 'user_id');
+    }
+
+    public function superListsPatner() {
+        return $this->hasMany(SuperList::class, 'partner_id');
+    }
+
+    //For messages table
+    public function message() {
+        return $this->hasMany(Message::class, 'user_id');
     }
 
     /**

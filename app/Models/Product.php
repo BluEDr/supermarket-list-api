@@ -9,6 +9,6 @@ class Product extends Model
 {
     use HasFactory;
     public function superList() {
-        return $this->belongsToMany(superList::class, "junction_superlists_products")->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(SuperList::class, "junction_superlists_products")->withPivot('quantity')->withTimestamps();
     }
 }
