@@ -15,4 +15,5 @@ class Partner extends Model
     public function partner() {
         return $this->belongsTo(User::class, 'partner_id');
     }
+    protected $fillable = ['user_id','partner_id'];
 }
