@@ -15,9 +15,20 @@ class PartnerController extends Controller
         $validateData = $request->validate([
             'partnersMail' => 'required | email'
         ]);
-        if ($partner && ($partnersMail !== $user->email)) {
-            //TODO: edo stamatisa na synexiso me tis eisagoges stin basi
-            $partner = Partner::create([
+        if(!$partner) {
+            return response()->JSON([
+                'status' => 'fail',
+                'message' => 'The partner email does not exist!'
+            ]);
+        }
+        $checkPartnership = Partner::where('id',$user->id)->orwhere('partner_id',$partner->id)->first();
+        if ($checkPartnership) {
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'You already added this partner in your parners list!'
+            ]);
+        } elseif ($partner && ($partnersMail !== $user->email)) {
+            $partner1 = Partner::create([
                 'user_id' => $user->id,
                 'partner_id' => $partner->id
             ]);
@@ -31,5 +42,31 @@ class PartnerController extends Controller
                 'status' => $partnersMail
             ]);
         } 
+    }
+
+    public function checkPartnership(Request $request) {
+        $user = auth()->user();
+        $partner = User::where('email',$request->partnerMail)->first();
+        if ($partner) {
+            $checkPartnership = Partner::where('partner_id',$partner->id)->where('user_id',$user->id)->first();
+            if($checkPartnership)
+                return response()->JSON([
+                    'status' => 'success',
+                    'partner' => $request->partnerMail,
+                    'isPartner' => true
+                ]);
+            else    
+                return response()->JSON([
+                    'status' => 'fail',
+                    'message' => 'There is no partnership with you.',
+                    'isPartner' => false
+                ]);
+        } else {
+            return response()->JSON([
+                'status' => 'fail',
+                'message' => 'There is no partner with this email',
+                'isPartner' => false
+            ]);
+        }
     }
 }

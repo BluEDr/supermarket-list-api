@@ -15,4 +15,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/addNewPartner', [PartnerController::class, 'createPartnership'])->name('addPartner');
+    Route::get('/checkPartnership', [PartnerController::class, 'checkPartnership'])->name('checkPartnership');
 });
