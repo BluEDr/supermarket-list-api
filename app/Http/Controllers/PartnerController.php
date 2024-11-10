@@ -21,7 +21,7 @@ class PartnerController extends Controller
                 'message' => 'The partner email does not exist!'
             ]);
         }
-        $checkPartnership = Partner::where('id',$user->id)->orwhere('partner_id',$partner->id)->first();
+        $checkPartnership = Partner::where('user_id',$user->id)->where('partner_id',$partner->id)->first();
         if ($checkPartnership) {
             return response()->json([
                 'status' => 'ok',
@@ -33,9 +33,15 @@ class PartnerController extends Controller
                 'partner_id' => $partner->id
             ]);
             return response()->JSON([
+                'status' => 'ok',
                 'user_name' => $user->name,
                 'user_mail' => $user->email,
                 'partnersMail' => $partner->email
+            ]);
+        } elseif ($user->id === $partner->id) {
+            return response()->JSON([
+                'status' => 'fail',
+                'message' => 'The email you sent is the same that you loged in.'
             ]);
         } else { //The email that sent is wrong
             return response()->JSON([
