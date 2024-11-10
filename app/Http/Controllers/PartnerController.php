@@ -53,7 +53,7 @@ class PartnerController extends Controller
     public function checkPartnership(Request $request) {
         $user = auth()->user();
         $partner = User::where('email',$request->partnerMail)->first();
-        if ($partner) {
+        if ($partner && ($partner->id !== $user->id)) {
             $checkPartnership = Partner::where('partner_id',$partner->id)->where('user_id',$user->id)->first();
             if($checkPartnership)
                 return response()->JSON([
@@ -67,6 +67,12 @@ class PartnerController extends Controller
                     'message' => 'There is no partnership with you.',
                     'isPartner' => false
                 ]);
+        } elseif ($partner->id === $user->id) {
+            return response()->JSON([
+                'status' => 'fail',
+                'message' => 'The email that you want to check is the same with the email from user that you loged in.',
+                'isPartner' => false
+            ]);
         } else {
             return response()->JSON([
                 'status' => 'fail',
