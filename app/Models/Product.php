@@ -11,4 +11,16 @@ class Product extends Model
     public function superList() {
         return $this->belongsToMany(SuperList::class, "junction_superlists_products")->withPivot('quantity')->withTimestamps();
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    
+    protected $fillable = [
+        'name',
+        'unit',
+        'barcode',
+        'description',
+        'user_id'
+    ];
 }
