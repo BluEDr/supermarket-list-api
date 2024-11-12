@@ -14,7 +14,8 @@ class ProductController extends Controller
         $validateData = Validator::make($request->all(),[
             'name' => 'required',
             'unit' => 'nullable | in:pieces,gr,kg,ml,l,grams,kilograms,milliliters,liters',
-            'barcode' => 'nullable | numeric'
+            'barcode' => 'nullable | numeric',
+            'description' => 'nullable'
         ]);
 
         if ($validateData->fails()) {
@@ -23,11 +24,14 @@ class ProductController extends Controller
                 'errors' => $validateData->errors() 
             ],422);
         }
-
-        $product = Product::create([
-            'name' => $name,
-            'user_id' => $user->id
-        ]);
+        //TODO: edo apo kato prepei na yparxei problima me tin kataxorisi toy user_id moy petaei ektos to name eno to stelno apo to post request
+        $validateData = $validateData->validated();
+        $validateData = array_filter($validateData, function ($value) {
+            return $value !== null;
+        });
+        $filteredData['user_id'] = $user->id;
+        //TODO: edo na kataxoro tis times poy exei dosei o xristis agnoontas ta nullable pedia poy den exei steilei
+        $product = Product::create($filteredData);
         return response()->JSON([
             'success' => true,
             'message' => 'The product added succesfully.'
