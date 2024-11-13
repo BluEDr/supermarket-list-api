@@ -24,18 +24,32 @@ class ProductController extends Controller
                 'errors' => $validateData->errors() 
             ],422);
         }
-        //TODO: edo apo kato prepei na yparxei problima me tin kataxorisi toy user_id moy petaei ektos to name eno to stelno apo to post request
         $validateData = $validateData->validated();
         $validateData = array_filter($validateData, function ($value) {
             return $value !== null;
         });
-        $filteredData['user_id'] = $user->id;
-        //TODO: edo na kataxoro tis times poy exei dosei o xristis agnoontas ta nullable pedia poy den exei steilei
-        $product = Product::create($filteredData);
+        $validateData['user_id'] = $user->id;
+        $product = Product::create($validateData);
         return response()->JSON([
             'success' => true,
             'message' => 'The product added succesfully.'
         ],201);
 
+    }
+
+    public function getAllProducts() {
+        $user = auth()->user();
+        $prod = Product::where('user_id',$user->id)->get();
+        if(!$prod) {
+            return response()->json([
+                'success' => false,
+                'message' => 'there are no Product data from this search.'
+            ], 404);
+        } else {
+            return response()->json([
+                'success' => true,
+                'data' => $prod
+            ], 200);
+        }
     }
 }

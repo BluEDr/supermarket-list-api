@@ -18,4 +18,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/addNewPartner', [PartnerController::class, 'createPartnership'])->name('addPartner');
     Route::get('/checkPartnership', [PartnerController::class, 'checkPartnership'])->name('checkPartnership');
     Route::post('/addNewProduct',[ProductController::class, 'addNewProduct'])->name('addProduct');
+    Route::get('/getAllProducts',[ProductController::class, 'getAllProducts'])->name('getAllProducts');
 });
