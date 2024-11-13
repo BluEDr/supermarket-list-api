@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SuperListController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -19,4 +20,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/checkPartnership', [PartnerController::class, 'checkPartnership'])->name('checkPartnership');
     Route::post('/addNewProduct',[ProductController::class, 'addNewProduct'])->name('addProduct');
     Route::get('/getAllProducts',[ProductController::class, 'getAllProducts'])->name('getAllProducts');
+    Route::get('/createANewSuperList',[SuperListController::class, 'createANewSuperList'])->name('createANewSuperList');
 });

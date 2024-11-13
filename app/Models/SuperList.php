@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class SuperList extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'user_id',
+        'partner_id'
+    ];
+
     //Many to many relationship with products table
     public function products() {
         return $this->belongsToMany(Product::class, "junction_superlists_products")->withPivot('quantity')->withTimestamps();
