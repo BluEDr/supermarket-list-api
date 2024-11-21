@@ -14,8 +14,8 @@ class SuperListController extends Controller
         $user = auth()->user();
         $validateReqData = Validator::make($request->all(), [
             'name' => 'required',
-            'partner_id' => 'nullable|numeric|exists:partners,id'
-        ]);  //TODO: akribos apo pano exo problima me to partners id otan to stelno den to dexete. 
+            'partner_id' => 'nullable|numeric|exists:partners,partner_id' //edo na elegxei kai o user_id oti einai idios me ton loged in user
+        ]); 
 
         if ($validateReqData->fails()) {
             return response()->json([
