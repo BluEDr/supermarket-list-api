@@ -24,7 +24,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return response()->json(['message' => 'User registered successfully']);
+        return response()->json(['status' => 'User registered successfully'],201);
     }
 
     public function login(Request $request)
@@ -52,7 +52,15 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         error_log(`$request`); 
-        return ["status"=>"You have succesfully loged in","req"=>$request->pass];
+        $user = auth()->user();
+        return response()->json(["status"=>"Success",
+            "data" => [
+                "id"=>$user->id,
+                "email"=>$user->email,
+                "name" => $user->name,
+                "registered date" => $user->created_at,
+            ]
+        ],200);
     }
 
     // Logout a user by deleting tokens

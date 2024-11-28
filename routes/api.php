@@ -18,7 +18,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/addNewPartner', [PartnerController::class, 'createPartnership'])->name('addPartner');
     Route::get('/checkPartnership', [PartnerController::class, 'checkPartnership'])->name('checkPartnership');
+    Route::post('/createANewSuperList',[SuperListController::class, 'createANewSuperList'])->name('createANewSuperList');
     Route::post('/addNewProduct',[ProductController::class, 'addNewProduct'])->name('addProduct');
     Route::get('/getAllProducts',[ProductController::class, 'getAllProducts'])->name('getAllProducts');
-    Route::get('/createANewSuperList',[SuperListController::class, 'createANewSuperList'])->name('createANewSuperList');
 });

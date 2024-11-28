@@ -25,7 +25,7 @@ class PartnerController extends Controller
         if ($checkPartnership) {
             return response()->json([
                 'status' => 'ok',
-                'message' => 'You already added this partner in your parners list!'
+                'message' => 'You have already added this partner in your parners list!'
             ]);
         } elseif ($partner && ($partnersMail !== $user->email)) {
             $partner1 = Partner::create([
@@ -33,10 +33,13 @@ class PartnerController extends Controller
                 'partner_id' => $partner->id
             ]);
             return response()->JSON([
-                'status' => 'ok',
-                'user_name' => $user->name,
-                'user_mail' => $user->email,
-                'partnersMail' => $partner->email
+                'status' => 'Success',
+                'message' => 'You have successfully added a new partner!',
+                'data' => [
+                    'partnersName' => $partner->name,
+                    'partnersMail' => $partner->email,
+                    'partnersCreatedAccount' => $partner->created_at,
+                ],
             ]);
         } elseif ($user->id === $partner->id) {
             return response()->JSON([
@@ -53,6 +56,13 @@ class PartnerController extends Controller
     public function checkPartnership(Request $request) {
         $user = auth()->user();
         $partner = User::where('email',$request->partnerMail)->first();
+        if(!$partner) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'The email that you sent is not in your partner list.',
+                'isPartner' => false,
+            ], 404);
+        }
         if ($partner && ($partner->id !== $user->id)) {
             $checkPartnership = Partner::where('partner_id',$partner->id)->where('user_id',$user->id)->first();
             if($checkPartnership)
