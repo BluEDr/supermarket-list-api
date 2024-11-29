@@ -16,10 +16,14 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    //For the partners table
     Route::post('/addNewPartner', [PartnerController::class, 'createPartnership'])->name('addPartner');
-    Route::delete('deletePartner/{id}', [PartnerController::class, 'deletePartner'])->name('delete.partner');
+    Route::delete('/deletePartner/{id}', [PartnerController::class, 'deletePartner'])->name('delete.partner');
     Route::get('/checkPartnership', [PartnerController::class, 'checkPartnership'])->name('checkPartnership');
+    //For the products table
     Route::post('/addNewProduct',[ProductController::class, 'addNewProduct'])->name('addProduct');
+    Route::delete('/deleteProduct/{id}', [ProductController::class, 'deleteAProduct'])->name('delete.product');
     Route::get('/getAllProducts',[ProductController::class, 'getAllProducts'])->name('getAllProducts');
+    //For the super_lists table
     Route::post('/createANewSuperList',[SuperListController::class, 'createANewSuperList'])->name('createANewSuperList');
 });

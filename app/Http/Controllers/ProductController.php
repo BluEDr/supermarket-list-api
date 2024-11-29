@@ -52,4 +52,28 @@ class ProductController extends Controller
             ], 200);
         }
     }
+
+    public function deleteAProduct($id) {
+        $user = auth()->user();
+        $product = Product::find($id);
+        if(!$product) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'There is no product with this id.'
+            ], 404);
+        } else {
+            if($product->user_id !== $user->id) {
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => 'You have to access to delete this product.'
+                ], 404);
+            } else {
+                $product->delete();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'You have successfully deleted the product.'
+                ], 200);
+            }
+        }
+    }
 }
