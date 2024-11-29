@@ -91,4 +91,21 @@ class PartnerController extends Controller
             ]);
         }
     }
+
+    public function deletePartner($id) {
+        $user = auth()->user();
+        $partner = Partner::where('user_id',$user->id)->where('partner_id',$id)->first();
+        if(!$partner) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'You are not partners with this user.'
+            ], 404);    
+        } else {
+            $partner->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'The partnership with this user has successfully deleted.'
+            ], 200);
+        }
+    }
 }

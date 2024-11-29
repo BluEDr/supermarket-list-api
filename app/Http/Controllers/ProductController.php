@@ -31,7 +31,7 @@ class ProductController extends Controller
         $validateData['user_id'] = $user->id;
         $product = Product::create($validateData);
         return response()->JSON([
-            'success' => true,
+            'status' => 'success',
             'message' => 'The product added succesfully.'
         ],201);
 
@@ -39,15 +39,15 @@ class ProductController extends Controller
 
     public function getAllProducts() {
         $user = auth()->user();
-        $prod = Product::where('user_id',$user->id)->get();
+        $prod = Product::where('user_id',$user->id)->first();
         if(!$prod) {
             return response()->json([
-                'success' => false,
+                'status' => "fail",
                 'message' => 'there are no Product data from this search.'
             ], 404);
         } else {
             return response()->json([
-                'success' => true,
+                'status' => "success",
                 'data' => $prod
             ], 200);
         }
