@@ -46,4 +46,47 @@ class SuperListController extends Controller
             ], 201);
         }
     }
+    public function updateSuperList(Request $request, $id) {
+        $user = auth()->user();
+        $loggedInUserId = $user->id;
+        $list = SuperList::where('id', $id) 
+            ->where(function ($query) use ($loggedInUserId) {
+                $query->where('user_id', $loggedInUserId) // Match user_id with logged-in user
+                    ->orWhere(function ($query) use ($loggedInUserId) {
+                        $query->where('partner_id', $loggedInUserId) // Match partner_id with logged-in user
+                                ->where('partners_write_permition', true); // Check if write permission is true
+                    });
+            })
+            ->first();
+            if(!$list) {
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => 'There is no superList with this id or you do not have access to it.'
+                ], 404);
+            } else {
+                $validatedData = $request->validate([
+                    'name' => 'sometimes|nullable',
+                ]);
+
+                if($list->user_id === $loggedInUserId) {  //here only if the loged in user is the user that created the list can change the write permition
+                    $additionalValidatedData = $request->validate([                 //TODO: Ayto to validation isos eprepe na to kano me rules, na to do gia na to matho. Doyleyei alla tha itan pio kathara grammeno me rule.
+                        'partners_write_permition' => 'sometimes|nullable|boolean', //TODO: in this validation maybe i have to update and the partners_id
+                    ]);
+                    $validatedData = array_merge($validatedData,$additionalValidatedData);
+                }
+                
+                $list->update($validatedData);   
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'The entry has been successfully updated.',
+                    'data' => $list,
+                ], 200);
+            }
+
+            return response()->json($list, 200);
+    }
 }
+
+
+

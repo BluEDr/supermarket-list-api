@@ -27,4 +27,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/getAllProducts',[ProductController::class, 'getAllProducts'])->name('getAllProducts');
     //For the super_lists table
     Route::post('/createANewSuperList',[SuperListController::class, 'createANewSuperList'])->name('createANewSuperList');
+    Route::put('/updateSuperList/{id}',[SuperListController::class, 'updateSuperList'])->name('update.superlist');
 });
