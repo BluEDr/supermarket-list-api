@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //For the products table
     Route::post('/addNewProduct',[ProductController::class, 'addNewProduct'])->name('addProduct');
     Route::delete('/deleteProduct/{id}', [ProductController::class, 'deleteAProduct'])->name('delete.product');
+    Route::put('/updateProduct/{id}', [ProductController::class, 'updateProduct'])->name('update.product');
     Route::get('/getAllProducts',[ProductController::class, 'getAllProducts'])->name('getAllProducts');
     //For the super_lists table
     Route::post('/createANewSuperList',[SuperListController::class, 'createANewSuperList'])->name('createANewSuperList');

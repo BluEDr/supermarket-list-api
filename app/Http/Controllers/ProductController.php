@@ -39,8 +39,8 @@ class ProductController extends Controller
 
     public function getAllProducts() {
         $user = auth()->user();
-        $prod = Product::where('user_id',$user->id)->first();
-        if(!$prod) {
+        $prod = Product::where('user_id',$user->id)->get();
+        if($prod->isEmpty()) {
             return response()->json([
                 'status' => "fail",
                 'message' => 'there are no Product data from this search.'
@@ -74,6 +74,30 @@ class ProductController extends Controller
                     'message' => 'You have successfully deleted the product.'
                 ], 200);
             }
+        }
+    }
+
+    public function updateProduct(Request $request, $id) {
+        $user = auth()->user();
+        $prod = Product::find($id);
+        if(!$prod) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'There is no product with this id.'
+            ], 404);
+        } else {
+            $validatedData = $request->validate([
+                'name' => 'sometimes',
+                'unit' => 'sometimes|in:pieces,gr,kg,ml,l,grams,kilograms,milliliters,liters',
+                'barcode' => 'sometimes|numeric',
+                'description' => 'sometimes'
+            ]);
+            $prod->update($validatedData);
+            return response()->json([
+                'status' => 'success', 
+                'message' => 'You have successfully update a product',
+                'data' => $prod
+            ], 200);
         }
     }
 }
