@@ -23,7 +23,9 @@ class SuperListController extends Controller
                 Rule::exists('partners', 'partner_id')->where(function ($query) {
                     $query->where('user_id', auth()->id()); // Check if user_id matches the logged-in user
                 }),
-            ] 
+            ],
+            
+            'partners_write_permition' => 'nullable|boolean',   //In case that the user does not add this value, i have add the false as a default value. 
         ]); 
 
         if ($validateReqData->fails()) {

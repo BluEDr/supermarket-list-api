@@ -12,7 +12,8 @@ class SuperList extends Model
     protected $fillable = [
         'name',
         'user_id',
-        'partner_id'
+        'partner_id',
+        'partners_write_permition'
     ];
 
     //Many to many relationship with products table
