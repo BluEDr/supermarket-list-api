@@ -42,7 +42,7 @@ class JunctionSuperListProductsController extends Controller
         }
     }
 
-    public function getProductsFromMyList(Request $request) {
+    public function getProductsFromMyList(Request $request) { 
         $user = auth()->user();
         $listId = intval($request->superListId);
         $list = SuperList::find($listId);
@@ -53,7 +53,6 @@ class JunctionSuperListProductsController extends Controller
                 $list->products; //kalei me apo to model tis superList tin product function kai etsi einai orato kai ektiponei poio kato sto return response kai to periexomeno toy ksenoy kleidioy me ta stoixeia apo ton sisxetizomeno pinaka
                 $list->partner;
                 $list->user;
- 
                 return response()->json([
                     'status' => 'success',
                     // 'partnersId' => optional($partner)->id, //the optional function used for protecting me from error in case that there is no partner data

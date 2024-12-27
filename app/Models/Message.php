@@ -15,4 +15,6 @@ class Message extends Model
     public function superList() {
         return $this->belongsTo(SuperList::class, 'super_list_id');
     }
+
+    // protected $fillable = ['title','message'];
 }

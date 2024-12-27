@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SuperListController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\JunctionSuperListProductsController;
 
 
@@ -32,4 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
     //For the Junction table
     Route::post('/addProductToList',[JunctionSuperListProductsController::class, 'addProductToList'])->name('addProductToList');
     Route::get('/getProductsFromMyList',[JunctionSuperListProductsController::class, 'getProductsFromMyList'])->name('getProductsFromMyList');
+    //For the meggages table
+    Route::post('/addANewMessage/{superListId}',[MessageController::class, 'addANewMessage']);
+    Route::put('/updateAMessage/{id}',[MessageController::class, 'update']);
+    Route::delete('/deleteMessage/{id}',[MessageController::class, 'delete']);
 });
