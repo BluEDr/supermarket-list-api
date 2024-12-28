@@ -86,6 +86,22 @@ class SuperListController extends Controller
 
             return response()->json($list, 200);
     }
+
+    public function deleteSuperList($id) {
+        $userId = auth()->id();
+        $sList = SuperList::where('id',$id)->where('user_id',$userId)->first();
+        if(!$sList) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'There is no superList with the given id or you have no access.'
+            ], 404);
+        }
+        $sList->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The super list has been successfully deleted.'
+        ], 200);
+    }
 }
 
 

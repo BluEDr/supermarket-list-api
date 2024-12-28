@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //For the super_lists table
     Route::post('/createANewSuperList',[SuperListController::class, 'createANewSuperList'])->name('createANewSuperList');
     Route::put('/updateSuperList/{id}',[SuperListController::class, 'updateSuperList'])->name('update.superlist');
+    Route::delete('/deleteSuperList/{id}',[SuperListController::class, 'deleteSuperList']);
     //For the Junction table
     Route::post('/addProductToList',[JunctionSuperListProductsController::class, 'addProductToList'])->name('addProductToList');
     Route::get('/getProductsFromMyList',[JunctionSuperListProductsController::class, 'getProductsFromMyList'])->name('getProductsFromMyList');
