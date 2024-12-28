@@ -108,7 +108,7 @@ php artisan serve
 
 |Key                            |Value                                                |
 |-------------------------------|-----------------------------------------------------|
-|`Authorization`                |`6|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
 
 
 * Response:
