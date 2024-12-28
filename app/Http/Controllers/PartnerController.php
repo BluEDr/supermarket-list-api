@@ -68,27 +68,28 @@ class PartnerController extends Controller
             if($checkPartnership)
                 return response()->JSON([
                     'status' => 'success',
-                    'partner' => $request->partnerMail,
+                    'partnersId' => $partner->id,
+                    'partnersMail' => $request->partnerMail,
                     'isPartner' => true
-                ]);
+                ], 200);
             else    
                 return response()->JSON([
                     'status' => 'fail',
                     'message' => 'There is no partnership with you.',
                     'isPartner' => false
-                ]);
+                ], 404);
         } elseif ($partner->id === $user->id) {
             return response()->JSON([
                 'status' => 'fail',
                 'message' => 'The email that you want to check is the same with the email from user that you loged in.',
                 'isPartner' => false
-            ]);
+            ], 404);
         } else {
             return response()->JSON([
                 'status' => 'fail',
                 'message' => 'There is no partner with this email',
                 'isPartner' => false
-            ]);
+            ], 404);
         }
     }
 

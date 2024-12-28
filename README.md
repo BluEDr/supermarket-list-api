@@ -110,79 +110,114 @@ php artisan serve
 |-------------------------------|-----------------------------------------------------|
 |`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
 
-
 * Response:
 ```JSON
 {
     "message": "Logged out successfully"
 }
 ```
+### Add new partner  
 
-  
+* URL: /api/addNewPartner
+* Method: POST
+* Request Header:
 
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+
+* Request Body:
+```JSON
+{
+    "partnersMail":"akis@skordos.com.gr"
+}
+```
+
+* Response:
+```JSON
+{
+    "status": "Success",
+    "message": "You have successfully added a new partner!",
+    "data": {
+        "partnersName": "Akis Sk",
+        "partnersMail": "akis@skordos.com.gr",
+        "partnersCreatedAccount": "2024-12-28T08:01:53.000000Z"
+    }
+}
+```
+
+### Check partnership  
+
+* URL: /api/checkPartnership
+* Method: GET
+* Request Header:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+
+* Request Params:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`partnerMail`                  |`akis@skordos.com.gr`                                  |
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "partnersId": 6,
+    "partnersMail": "akis@skordos.com.gr",
+    "isPartner": true
+}
+```
+
+### Delete partner
+
+* URL: /api/deletePartner/{id}
+* Method: DELETE
+* Request Header:
   
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "The partnership with this user has successfully deleted."
+}
+```
 
 ## Database Schema
-
-  
+ 
 
 ### Tables
-
-  
   
 
 //edo na balo tin eikona gia tin db
-
   
 
 ## Built With
 
-  
-
 * Laravel 11
-
-  
-
 * MySQL
-
-  
-
 * Sanctum for authentication
-
-  
-
 * Postman Client for testing
-
-  
-
-  
 
 ## Contributing
 
-  
-
-  
-
 ### License
-
-  
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-  
-
-  
-
 ### Contact
-
-  
 
 For any questions, feel free to reach out:
 
-  
-
 * Email: skordos88@gmail.com
-
-  
-
 * GitHub: [github.com/BluEDr](https://github.com/BluEDr)
+* LinkedIn: [https://www.linkedin.com/in/tryfon-skordos-01a62a12a/](https://www.linkedin.com/in/tryfon-skordos-01a62a12a/)
