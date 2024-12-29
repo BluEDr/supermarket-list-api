@@ -66,10 +66,7 @@ php artisan serve
 
 # API Documentation
 
-
-## Authentication
-
-  
+- In the following documentation, I have included the example header value 6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6. In your case, you first need to make an HTTP request to the /api/login endpoint to obtain an access token. Then, include this token in the header of every subsequent request you make.
 
 ### Register
 
