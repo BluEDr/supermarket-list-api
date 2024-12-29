@@ -192,6 +192,336 @@ php artisan serve
 }
 ```
 
+### Add new product  
+
+* URL: /api/addNewProduct
+* Method: POST
+* Request Header:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+
+* Request Body:
+```JSON
+{    
+    "name" : "ΝΟΥΝΟΥ Kid Ρόφημα Γάλακτος Υψηλής Παστερίωσης Παιδικό από 2 Ετών",
+    "unit" : "ml",
+    "barcode" : "5206851242421"
+}
+```
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "The product added succesfully."
+}
+```
+
+### Delete a product
+
+* URL: /api/deleteProduct/{id}
+* Method: DELETE
+* Request Header:
+  
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "You have successfully deleted the product."
+}
+```
+### Update a product
+
+* URL: /api/updateProduct/{id}
+* Method: PUT
+* Request Header:
+  
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+* Request Body:
+```JSON    
+{
+    "barcode" : 2565889,
+    "name" : "pop corns",
+    "unit" : "grams"
+}
+```
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "You have successfully update a product",
+    "data": {
+        "id": 9,
+        "name": "pop corns",
+        "unit": "grams",
+        "barcode": 2565889,
+        "description": null,
+        "user_id": 1,
+        "created_at": "2024-12-29T07:46:29.000000Z",
+        "updated_at": "2024-12-29T07:52:34.000000Z"
+    }
+}
+```
+
+### Get all products  
+
+* URL: /api/getAllProducts
+* Method: GET
+* Request Header:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "data": [
+        {
+            "id": 6,
+            "name": "LURPAK Βούτυρο Ανάλατo 500gr",
+            "unit": "gr",
+            "barcode": "5740900837430",
+            "description": "Ανάλατo",
+            "user_id": 1,
+            "created_at": "2024-11-29T11:07:26.000000Z",
+            "updated_at": "2024-11-29T11:07:26.000000Z"
+        },
+        {
+            "id": 8,
+            "name": "ΝΟΥΝΟΥ Kid Ρόφημα Γάλακτος Υψηλής Παστερίωσης Παιδικό από 2 Ετών",
+            "unit": "ml",
+            "barcode": "5206851242421",
+            "description": null,
+            "user_id": 1,
+            "created_at": "2024-12-29T07:43:42.000000Z",
+            "updated_at": "2024-12-29T07:43:42.000000Z"
+        },
+        {
+            "id": 9,
+            "name": "pop corns",
+            "unit": "grams",
+            "barcode": "2565889",
+            "description": null,
+            "user_id": 1,
+            "created_at": "2024-12-29T07:46:29.000000Z",
+            "updated_at": "2024-12-29T07:52:34.000000Z"
+        }
+    ]
+}
+```
+### Add new super market list  
+
+* URL: /api/createANewSuperList
+* Method: POST
+* Request Header:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+
+* Request Body:
+```JSON
+{
+    "name": "Σκλαβενίτης",
+    "partner_id":5,    
+    "partners_write_permition":true
+}
+```
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "The new super_list has succesfully created.",
+    "data": {
+        "name": "Σκλαβενίτης",
+        "partner_id": 5,
+        "partners_write_permition": true,
+        "user_id": 1
+    }
+}
+```
+### Update a super market list
+
+* URL: /api/updateSuperList/{id}
+* Method: PUT
+* Request Header:
+  
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+* Request Body:
+```JSON    
+{
+    "name" : "ΑΒ Βασιλόπουλος",
+    "partners_write_permition" : false
+}
+```
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "The entry has been successfully updated.",
+    "data": {
+        "id": 36,
+        "name": "ΑΒ Βασιλόπουλος",
+        "user_id": 1,
+        "partner_id": 5,
+        "partners_write_permition": false,
+        "created_at": "2024-12-29T08:03:32.000000Z",
+        "updated_at": "2024-12-29T08:06:40.000000Z"
+    }
+}
+```
+### Delete a super markt list
+
+* URL: /api/deleteSuperList/{id}
+* Method: DELETE
+* Request Header:
+  
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "The super list has been successfully deleted."
+}
+```
+### Add new product in a super market list  
+
+* URL: /api/addNewProduct
+* Method: POST
+* Request Header:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+
+* Request Body:
+```JSON
+{
+    "superId":36,
+    "productId":8
+}
+```
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "list": {
+        "id": 36,
+        "name": "ΑΒ Βασιλόπουλος",
+        "user_id": 1,
+        "partner_id": 5,
+        "partners_write_permition": 0,
+        "created_at": "2024-12-29T08:03:32.000000Z",
+        "updated_at": "2024-12-29T08:06:40.000000Z"
+    },
+    "product": {
+        "id": 8,
+        "name": "ΝΟΥΝΟΥ Kid Ρόφημα Γάλακτος Υψηλής Παστερίωσης Παιδικό από 2 Ετών",
+        "unit": "ml",
+        "barcode": "5206851242421",
+        "description": null,
+        "user_id": 1,
+        "created_at": "2024-12-29T07:43:42.000000Z",
+        "updated_at": "2024-12-29T07:43:42.000000Z"
+    }
+}
+```
+### Get the products from a super market list
+
+* URL: /api/checkPartnership
+* Method: GET
+* Request Header:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+
+* Request Params:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`superListId`                  |36                                                   |
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "list": {
+        "id": 36,
+        "name": "ΑΒ Βασιλόπουλος",
+        "user_id": 1,
+        "partner_id": 5,
+        "partners_write_permition": 0,
+        "created_at": "2024-12-29T08:03:32.000000Z",
+        "updated_at": "2024-12-29T08:06:40.000000Z",
+        "products": [
+            {
+                "id": 8,
+                "name": "ΝΟΥΝΟΥ Kid Ρόφημα Γάλακτος Υψηλής Παστερίωσης Παιδικό από 2 Ετών",
+                "unit": "ml",
+                "barcode": "5206851242421",
+                "description": null,
+                "user_id": 1,
+                "created_at": "2024-12-29T07:43:42.000000Z",
+                "updated_at": "2024-12-29T07:43:42.000000Z",
+                "pivot": {
+                    "super_list_id": 36,
+                    "product_id": 8,
+                    "quantity": "1.00",
+                    "created_at": "2024-12-29T08:13:00.000000Z",
+                    "updated_at": "2024-12-29T08:13:00.000000Z"
+                }
+            }
+        ],
+        "partner": {
+            "id": 5,
+            "name": "Nikos Skordos",
+            "email": "nikos@nikos.gr",
+            "email_verified_at": null,
+            "created_at": "2024-11-28T08:10:37.000000Z",
+            "updated_at": "2024-11-28T08:10:37.000000Z"
+        },
+        "user": {
+            "id": 1,
+            "name": "Akis",
+            "email": "skordos88@gmail.com",
+            "email_verified_at": null,
+            "created_at": "2024-11-26T08:10:57.000000Z",
+            "updated_at": "2024-11-26T08:10:57.000000Z"
+        }
+    }
+}
+```
+
+
+
+
 ## Database Schema
  
 
