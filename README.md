@@ -57,6 +57,13 @@ php artisan migrate
 ```bash
 php artisan serve
 ```
+
+
+## Database Schema
+ 
+
+![Alt text](resources/images/db_schema.png)
+
 # API Documentation
 
 
@@ -518,17 +525,74 @@ php artisan serve
     }
 }
 ```
+### Add a new message in a super market list 
+
+* URL: /api/addANewMessage/{superListId}
+* Method: POST
+* Request Header:
+
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
 
 
+* Request Body:
+```JSON
+{
+    "title":"Ωρα αγοράς",
+    "message":"Παρακαλώ κάνε την αγορά πριν τις 13.00. Ευχαριστώ."
+}
+```
 
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "You have successfully added a new message!"
+}
+```
+### Update a message
 
-## Database Schema
- 
-
-### Tables
+* URL: /api/updateAMessage/{id}
+* Method: PUT
+* Request Header:
   
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
 
-//edo na balo tin eikona gia tin db
+* Request Body:
+```JSON    
+{
+    "title":"Ωρα αγοράς",
+    "message":"Παρακαλώ κάνε την αγορά πριν τις 15.00. Ευχαριστώ."
+}
+```
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "The message has succeccfully updated."
+}
+```
+### Delete a message
+
+* URL: /api/deleteMessage/{id}
+* Method: DELETE
+* Request Header:
+  
+|Key                            |Value                                                |
+|-------------------------------|-----------------------------------------------------|
+|`Authorization`                |`6\|lilV61oUWSpNPJbDoLJH1l7BnK4pxIJrWVHxOyZl60df52f6` |
+
+* Response:
+```JSON
+{
+    "status": "success",
+    "message": "The message has successfully deleted."
+}
+```
   
 
 ## Built With
