@@ -20,7 +20,7 @@ A RESTful API built with Laravel for managing supermarket shopping lists. Users 
 - PHP 8.2 or higher
 - Composer
 - MySQL
-- Laravel Framework
+- Laravel Framework 11.25.0
 
 ### Steps
 1. Clone the repository:
